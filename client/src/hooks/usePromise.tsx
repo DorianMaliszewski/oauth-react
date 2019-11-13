@@ -35,7 +35,7 @@ const usePromise = (promise?: Promise<any>) => {
 
   useEffect(() => {
     if (promise) race(promise);
-  }, [promise]);
+  }, []);
 
   return {
     response: data,

@@ -20,7 +20,7 @@ CREATE TABLE `oauth_client_details` (
   PRIMARY KEY (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+/*
 drop table if exists oauth_client_token;
 create table oauth_client_token
 (
@@ -68,16 +68,13 @@ create table oauth_approvals
   expiresAt      TIMESTAMP,
   lastModifiedAt TIMESTAMP
 );
-
+*/
 
 LOCK TABLES `oauth_client_details` WRITE;
 INSERT INTO `oauth_client_details`
 VALUES ('test', 'ms/authorization', '{bcrypt}$2y$10$xLA8Tyrkj3NZXFBFy1hnReB01Q/Zm2RKHexqLmeM.cvP8kMylYLpu',
         'ROLE_ADMIN,ROLE_USER', 'password,refresh_token', NULL,
-        'ROLE_ADMIN,ROLE_USER', 2600000, 5200000, '{}', NULL),
-        ('test2', 'ms/authorization', '{bcrypt}$2y$10$xLA8Tyrkj3NZXFBFy1hnReB01Q/Zm2RKHexqLmeM.cvP8kMylYLpu',
-        'ROLE_USER', 'authorization_code', 'http://localhost:8081/',
-        'ROLE_USER', 2600000, 5200000, '{}', true);
+        'ROLE_ADMIN,ROLE_USER', 2600000, 5200000, '{}', NULL);
 UNLOCK TABLES;
 
 
@@ -162,6 +159,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user`
 VALUES (1, 'admin', '{bcrypt}$2y$10$JgYLZ4eEZLEkFZD9zLf6SOMnJGb7UtcZGIPSeD8iQDaiR.KQeXrkW', 'contact@admin.fr', 'Administrateur', 1,
-        '\0', '\0', '\0', 1, NOW(), NOW(), 0);
+        '\0', '\0', '\0', 1, NOW(), NOW(), 0),
+        (2, 'user', '{bcrypt}$2y$10$JgYLZ4eEZLEkFZD9zLf6SOMnJGb7UtcZGIPSeD8iQDaiR.KQeXrkW', 'contact@user.fr', 'user', 1,
+        '\0', '\0', '\0', 2, NOW(), NOW(), 0);
 
 SET FOREIGN_KEY_CHECKS=1;

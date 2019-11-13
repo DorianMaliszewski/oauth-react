@@ -7,8 +7,18 @@ const Axios = axios.create({
 
 if (localStorage.getItem(AUTH_TOKEN)) {
   Axios.defaults.headers = {
-    Authorization: 'Bearer' + localStorage.getItem(AUTH_TOKEN)
+    Authorization: 'Bearer ' + localStorage.getItem(AUTH_TOKEN)
   };
 }
+
+Axios.interceptors.request.use(
+  config => {
+    if (localStorage.getItem(AUTH_TOKEN)) {
+      config.headers.Authorization = 'Bearer ' + localStorage.getItem(AUTH_TOKEN);
+    }
+    return config;
+  },
+  error => Promise.reject(error)
+);
 
 export default Axios;

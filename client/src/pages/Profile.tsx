@@ -4,6 +4,7 @@ import UserInfo from '../components/Users/UserInfo';
 import usePromise from '../hooks/usePromise';
 import { UserApi } from '../api/UserApi';
 import classes from '*.module.css';
+import { AUTH_TOKEN } from '../constants';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -12,15 +13,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Profile = () => {
-  const { response, error, isLoading } = usePromise(UserApi.findMyInformation);
+  const { error, isLoading, race } = usePromise();
   const [me, setMe] = useState();
   const classes = useStyles();
-
   useEffect(() => {
-    if (response) {
-      setMe(response.data);
-    }
-  }, [response]);
+    race(UserApi.getInstance().findMyInformation(), (res: any) => {
+      setMe(res.data);
+    });
+  }, []);
 
   if (isLoading) {
     return (

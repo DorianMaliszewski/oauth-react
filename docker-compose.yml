@@ -1,0 +1,26 @@
+version: "3.6"
+
+services:
+  authorization-server-db:
+    image: mariadb
+    environment:
+      - MYSQL_DATABASE=oauth_db
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - /tmp/authorization-server-db:/var/lib/mysql
+
+  authorization-server:
+    image: authorization-server
+    env_file:
+      - .env_file
+    ports:
+      - 8080:8080
+    depends_on:
+      - authorization-server-db
+
+  web:
+    image: react-authorization-server-web
+    ports:
+      - 80:80
