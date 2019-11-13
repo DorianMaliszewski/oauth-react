@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import useAxios from '../hooks/useAxios';
-import { UserApiConfig } from '../api/UserApi';
+import useAxios from '../../hooks/useAxios';
+import { UserApiConfig } from '../../api/UserApi';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { AUTH_TOKEN } from '../constants';
+import { AUTH_TOKEN } from '../../constants';
 
 const UsersList = (props: any) => {
   const { response, isLoading, error } = useAxios(UserApiConfig.findAllConfig, true, localStorage.getItem(AUTH_TOKEN));

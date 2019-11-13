@@ -1,11 +1,14 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Button, createStyles, Theme, CssBaseline, Container } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Button, createStyles, Theme, CssBaseline, Divider } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import PersonIcon from '@material-ui/icons/Person';
 import { makeStyles } from '@material-ui/styles';
 import { routes } from '../routes';
 import { AUTH_TOKEN } from '../constants';
 import { useHistory } from 'react-router';
 import Copyright from '../components/Copyright';
+import { Link } from 'react-router-dom';
+import ButtonLink from '../components/Buttons/ButtonLink';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +41,8 @@ const MainLayout = (props: any) => {
     history.push(routes.LOGIN.path);
   };
 
+  const currentRoute = Object.values(routes).find((route: any) => route.path === history.location.pathname);
+
   return (
     <>
       <CssBaseline />
@@ -47,9 +52,13 @@ const MainLayout = (props: any) => {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' className={classes.title}>
-            Mon application
+            {currentRoute ? currentRoute.title : 'Mon application'}
           </Typography>
-          <Button color='inherit' onClick={logout}>
+          <ButtonLink color='inherit' startIcon={<PersonIcon />} to={routes.PROFILE.path}>
+            Mon Compte
+          </ButtonLink>
+          <Divider orientation='vertical' variant='middle' />
+          <Button color='secondary' onClick={logout} variant='contained'>
             Se déconnecter
           </Button>
         </Toolbar>

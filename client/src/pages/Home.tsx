@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
 import { routes } from '../routes';
 import { Typography, Grid, Paper, makeStyles, Theme } from '@material-ui/core';
-import UsersList from '../components/UsersList';
+import UsersList from '../components/Users/UsersList';
 
 const useStyles = makeStyles((theme: Theme) => ({
   grid: {
